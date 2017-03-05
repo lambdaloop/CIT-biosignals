@@ -1,6 +1,7 @@
 import pyglet
 from time import time, sleep
 from pyglet.text import Label, HTMLLabel
+# see http://www.poketcode.com/pyglet.html
 
 from pyglet.gl import *
 
@@ -32,13 +33,18 @@ class CustomSprite(pyglet.sprite.Sprite):
         self.draw()
 
 class MainScreen(pyglet.window.Window):
-    def __init__ (self):
-        super(MainScreen, self).__init__(800, 600, fullscreen = False)
+    def __init__ (self,
+            width=800,
+            height=600,
+            background_color = (0, .5, .8, 1)):
+        super(MainScreen, self).__init__(width, height, fullscreen = False)
         self.x, self.y = 0, 0
 
         #self.bg = CustomSprite(figbg)
         self.sprites = []
         self.alive = 1
+        # sets the background color
+        gl.glClearColor(*background_color)
 
     def on_draw(self):
         self.render()
@@ -72,7 +78,7 @@ class MainScreen(pyglet.window.Window):
         elif symbol == key.R:
             print('Rendering hello')
             self.label = HTMLLabel(
-                       '''<font face="Times New Roman" size="32" color="white">
+                       '''<font face="Times New Roman" size="42" color="white">
                        Hello, <i>world</i></font>''',
                        x=self.width//2, y=self.height//2,
                        anchor_x='center', anchor_y='center')
@@ -80,15 +86,14 @@ class MainScreen(pyglet.window.Window):
 
         elif symbol == key.T:
             print('Rendering hello plain')
+            self.clear_sprites()
             self.label = Label('Hello, world',
                   font_name='Times New Roman',
-                  font_size=36,
+                  font_size=42,
                   x=self.width//2, y=self.height//2,
                   anchor_x='center', anchor_y='center',
-                  color=(255,255,255,255),
+                  color=(255, 0, 0, 255),
                   )
-            self.label.draw()
-
 
     def render(self):
         self.clear()
@@ -96,6 +101,10 @@ class MainScreen(pyglet.window.Window):
 
         for sprite_obj in self.sprites:
             sprite_obj._draw()
+
+        if hasattr(self, "label"):
+            # Draw text
+            self.label.draw()
 
         self.flip()
 
