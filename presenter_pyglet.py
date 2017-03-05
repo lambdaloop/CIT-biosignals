@@ -1,8 +1,22 @@
 import pyglet
+from pyglet.text import Label, HTMLLabel
+
 from pyglet.gl import *
 
 key = pyglet.window.key
 #figbg = "test.jpg"
+
+class LabelPgl(Label):
+    def __init__(self, text, x=0, y=0, font_name = 'Times New Roman',
+                 font_size=36):
+        super(LabelPgl, self).__init__('Hello, world',
+                  font_name=font_name,
+                  font_size=font_size,
+                  anchor_x='center', anchor_y='center')
+
+    def _draw(self):
+        self.draw()
+
 
 class CustomSprite(pyglet.sprite.Sprite):
     def __init__(self, texture_file, x=0, y=0):
@@ -54,7 +68,23 @@ class MainScreen(pyglet.window.Window):
                     CustomSprite('img/dog.png', x=10, y=10)
                                )
         elif symbol == key.R:
-            doc = pyglet.text.decode_html("Hello")
+            print('Rendering hello')
+            self.label = HTMLLabel(
+                       '''<font face="Times New Roman" size="32" color="white">
+                       Hello, <i>world</i></font>''',
+                       x=self.width//2, y=self.height//2,
+                       anchor_x='center', anchor_y='center')
+            self.label.draw()
+
+        elif symbol == key.T:
+            print('Rendering hello plain')
+            self.label = LabelPgl('Hello, world',
+                  font_name='Times New Roman',
+                  font_size=36,
+                  x=self.width//2, y=self.height//2,
+                  )
+            self.label.draw()
+
 
     def render(self):
         self.clear()
