@@ -1,4 +1,5 @@
 import pyglet
+from time import time, sleep
 from pyglet.text import Label, HTMLLabel
 
 from pyglet.gl import *
@@ -53,6 +54,7 @@ class MainScreen(pyglet.window.Window):
             pass
 
     def on_key_press(self, symbol, modifiers):
+        print(time(), symbol, sep="\t")
         if symbol == key.ESCAPE: # [ESC]
             self.alive = 0
         elif symbol == key.C:
@@ -78,10 +80,12 @@ class MainScreen(pyglet.window.Window):
 
         elif symbol == key.T:
             print('Rendering hello plain')
-            self.label = LabelPgl('Hello, world',
+            self.label = Label('Hello, world',
                   font_name='Times New Roman',
                   font_size=36,
                   x=self.width//2, y=self.height//2,
+                  anchor_x='center', anchor_y='center',
+                  color=(255,255,255,255),
                   )
             self.label.draw()
 
