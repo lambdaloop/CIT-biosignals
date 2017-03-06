@@ -104,12 +104,11 @@ class MainScreen(pyglet.window.Window):
                     self.clear_sprites()
                     self.clear_sprites()
                     print(i)
-                    image = pyglet.image.load(i)
-                    image.blit(0, 0)
-
-                    # self.sprites.append(
-                    #         CustomSprite(i, x=10, y=10)
-                    #         )
+                    # i = i.split("/")[1]
+                    # image = pyglet.image.load(i)
+                    self.sprites.append(
+                            CustomSprite(i, x=10, y=10)
+                            )
 
     def render(self):
         self.clear()
@@ -117,7 +116,7 @@ class MainScreen(pyglet.window.Window):
 
         for sprite_obj in self.sprites:
             sprite_obj = sprite_obj.scale(.9)
-            sprite_obj._draw()
+            image.blit(10, 10)
 
         if hasattr(self, "label"):
             # Draw text
