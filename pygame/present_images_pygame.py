@@ -58,7 +58,7 @@ for image_path, img in images:
     print(time.time() - t)
     t = time.time()
 
-    print(image_path)
+    print(image_path, hash(image_path))
     image_slide(img)
     outlet.push_sample([hash(image_path)], time.time())
     time.sleep(4)
@@ -68,7 +68,7 @@ for image_path, img in images:
         exit()
 
     focus_slide()
-    outlet.push_sample([0], time.time())
+    outlet.push_sample([-1], time.time())
     time.sleep(2.0)
 
     if check_for_escape():
