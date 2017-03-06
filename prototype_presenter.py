@@ -1,5 +1,6 @@
 import pyglet
 from time import time, sleep
+from generate_images import *
 from pyglet.text import Label, HTMLLabel
 # see http://www.poketcode.com/pyglet.html
 
@@ -94,12 +95,28 @@ class MainScreen(pyglet.window.Window):
                   anchor_x='center', anchor_y='center',
                   color=(255, 0, 0, 255),
                   )
+        elif symbol == key.SPACE:
+            print('Starting Game')
+            images = gen_image()
+            for i in images:
+                    sleep(10)
+                    print('Rendering Next Home')
+                    self.clear_sprites()
+                    self.clear_sprites()
+                    print(i)
+                    image = pyglet.image.load(i)
+                    image.blit(0, 0)
+
+                    # self.sprites.append(
+                    #         CustomSprite(i, x=10, y=10)
+                    #         )
 
     def render(self):
         self.clear()
         #self.bg.draw()
 
         for sprite_obj in self.sprites:
+            sprite_obj = sprite_obj.scale(.9)
             sprite_obj._draw()
 
         if hasattr(self, "label"):
