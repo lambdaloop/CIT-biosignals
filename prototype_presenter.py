@@ -99,7 +99,7 @@ class MainScreen(pyglet.window.Window):
             print('Starting Game')
             images = gen_image()
             for i in images:
-                    sleep(10)
+                    sleep(5)
                     print('Rendering Next Home')
                     self.clear_sprites()
                     self.clear_sprites()
